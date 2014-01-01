@@ -44,6 +44,7 @@ module Rebay
     def find_items_by_product(params)
       raise ArgumentError unless params[:productId]
       params['productId.@type'] = 'ISBN'
+      pp build_request_url('findItemsByProduct', params)
       response = get_json_response(build_request_url('findItemsByProduct', params))
       response.trim(:findItemsByProductResponse)
       if response.response.has_key?('searchResult') && response.response['searchResult'].has_key?('item')
